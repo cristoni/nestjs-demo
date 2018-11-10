@@ -6,11 +6,19 @@ export interface EnvConfig {
   [key: string]: string;
 }
 
+/**
+ * ConfigService is used the load, validate and inject our projects configuration
+ * inside other modules
+ */
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(filePath: string) {
+
+    // Load the config file
     const config = dotenv.parse(fs.readFileSync(filePath));
+
+    // Validate the config file and save it in this service instance
     this.envConfig = this.validateInput(config);
   }
 
@@ -38,5 +46,25 @@ export class ConfigService {
       throw new Error(`Config validation error: ${error.message}`);
     }
     return validatedEnvConfig;
+  }
+
+  public getDbHost(): string {
+    return this.envConfig.DB_HOST;
+  }
+
+  public getDbPort(): number {
+    return Number(this.envConfig.DB_PORT);
+  }
+
+  public getDbUsername(): string {
+    return this.envConfig.DB_USERNAME;
+  }
+
+  public getDbPassword(): string {
+    return this.envConfig.DB_PASSWORD;
+  }
+
+  public getDbName(): string {
+    return this.envConfig.DB_NAME;
   }
 }
