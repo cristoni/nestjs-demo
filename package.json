@@ -23,6 +23,7 @@
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
     "dotenv": "^6.1.0",
+    "event-stream": "^3.3.4",
     "joi": "^14.0.3",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2",
