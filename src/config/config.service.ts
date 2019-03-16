@@ -1,15 +1,17 @@
 import * as dotenv from 'dotenv';
 import * as Joi from 'joi';
 import * as fs from 'fs';
+import { Injectable } from '@nestjs/common';
 
 export interface EnvConfig {
   [key: string]: string;
 }
 
 /**
- * ConfigService is used the load, validate and inject our projects configuration
+ * ConfigService is used to load, validate and inject our projects configuration
  * inside other modules
  */
+@Injectable()
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
@@ -48,23 +50,23 @@ export class ConfigService {
     return validatedEnvConfig;
   }
 
-  public getDbHost(): string {
+  public get dbHost(): string {
     return this.envConfig.DB_HOST;
   }
 
-  public getDbPort(): number {
+  public get dbPort(): number {
     return Number(this.envConfig.DB_PORT);
   }
 
-  public getDbUsername(): string {
+  public get dbUsername(): string {
     return this.envConfig.DB_USERNAME;
   }
 
-  public getDbPassword(): string {
+  public get dbPassword(): string {
     return this.envConfig.DB_PASSWORD;
   }
 
-  public getDbName(): string {
+  public get dbName(): string {
     return this.envConfig.DB_NAME;
   }
 }
